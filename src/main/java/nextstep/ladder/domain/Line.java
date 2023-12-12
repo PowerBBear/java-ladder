@@ -14,13 +14,7 @@ public class Line {
 
     private void validationLine(List<Point> points) {
         for (int i = 0; i < points.size() - 1; i++) {
-            equalsTwoPoints(points.get(i), points.get(i + 1));
-        }
-    }
-
-    private void equalsTwoPoints(Point point, Point point2) {
-        if (point.getIsStair() && point2.getIsStair()) {
-            throw new IllegalArgumentException(EQUAL_TWO_POINTS_ERROR);
+            points.get(i).validationTwoContinuePoints(points.get(i + 1));
         }
     }
 

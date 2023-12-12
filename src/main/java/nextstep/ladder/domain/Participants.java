@@ -2,9 +2,10 @@ package nextstep.ladder.domain;
 
 import org.apache.commons.lang3.StringUtils;
 
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.stream.Collectors;
+import java.util.stream.IntStream;
 
 public class Participants {
     private static final String PARTICIPANTS_BLANK_ERROR = "참가자를 입력해주세요.";
@@ -12,12 +13,14 @@ public class Participants {
 
     private final List<Participant> participants;
 
-    public Participants(String participants) {
-        this.participants = new ArrayList<>();
-        isNullParticipants(participants);
-        for (String participant : convertList(splitParticipants(participants))) {
-            this.participants.add(new Participant(participant));
-        }
+    public Participants(List<String> participants) {
+        this.participants = convertParticipants(participants);
+    }
+
+    private List<Participant> convertParticipants(List<String> participants) {
+        return IntStream.range(0, participants.size())
+                .mapToObj(position -> new Participant(participants.get(position), position))
+                .collect(Collectors.toList());
     }
 
     private void isNullParticipants(String participants) {

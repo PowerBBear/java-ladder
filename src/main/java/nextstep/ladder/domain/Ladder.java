@@ -1,22 +1,15 @@
 package nextstep.ladder.domain;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.stream.Collectors;
-import java.util.stream.IntStream;
-
 public class Ladder {
     private static final String MINIMUM_HEIGHT_ERROR = "사다리 최고 높이는 1보다 작을 수 없습니다.";
     private static final int MINIMUM_HEIGHT = 1;
 
-    private final List<Line> lines = new ArrayList<>();
+    private final Lines ladderLines;
 
     public Ladder(int maxHeight, Participants participants) {
         validationMaxHeight(maxHeight);
 
-        for (int i=0; i<maxHeight; i++) {
-            lines.add(makeRandomLine(participants.getNumberOfParticipants()));
-        }
+        this.ladderLines = makeRandomLines(maxHeight, participants.getNumberOfParticipants());
     }
 
     private void validationMaxHeight(int maxHeight) {
@@ -25,11 +18,11 @@ public class Ladder {
         }
     }
 
-    public List<Line> getLines() {
-        return lines;
+    public Lines getLadderLines() {
+        return ladderLines;
     }
 
-    private Line makeRandomLine(int numberOfParticipants) {
-        return new Line(RandomLine.makeRandomLine(numberOfParticipants));
+    private Lines makeRandomLines(int maxHeight, int numberOfParticipants) {
+        return RandomLinesFactory.createLines(maxHeight, numberOfParticipants);
     }
 }

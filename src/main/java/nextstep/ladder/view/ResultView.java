@@ -18,24 +18,24 @@ public class ResultView {
         System.out.println(RESULT_PLAY);
 
         participants.getParticipants().forEach(p -> {
-            int spacesToAdd = 6 - p.getParticipant().length();
-            System.out.print(p.getParticipant() + " ".repeat(spacesToAdd));
+            int spacesToAdd = 6 - p.getName().length();
+            System.out.print(p.getName() + " ".repeat(spacesToAdd));
         });
         System.out.println();
-        ladder.getLines().forEach(ResultView::drawLadder);
+        ladder.getLadderLines().getLines().forEach(ResultView::drawLadder);
     }
 
     private static void drawLadder(Line line) {
         System.out.print(LINE);
         StringBuilder printLine = new StringBuilder();
-        for (int i=0; i<line.getPoints().size(); i++) {
+        for (int i = 0; i < line.getPoints().size(); i++) {
             printLine.append(drawStair(line.getPoints().get(i)));
         }
         System.out.println(printLine);
     }
 
     private static String drawStair(Point point) {
-        if (point.getIsStair()) {
+        if (point.pointStatus()) {
             return LADDER_LINE + LINE;
         }
         return LADDER_EMPTY + LINE;

@@ -1,5 +1,7 @@
 package nextstep.ladder.view;
 
+import java.util.Arrays;
+import java.util.List;
 import java.util.Scanner;
 
 public class InputView {
@@ -13,11 +15,16 @@ public class InputView {
 
     public static String participants() {
         System.out.println(PARTICIPANT_NAME);
-        return scanner.nextLine();
+        return Arrays.asList(scanner.nextLine().split(","));
     }
 
     public static Integer ladderHeight() {
         System.out.println(MAXIMUM_LADDER_HEIGHT);
         return Integer.parseInt(scanner.nextLine());
+    }
+
+    public static List<String> ladderResults() {
+        System.out.println("실행 결과를 입력하세요. (결과는 쉼표(,)로 구분하세요)");
+        return Arrays.asList(scanner.nextLine().split(","));
     }
 }

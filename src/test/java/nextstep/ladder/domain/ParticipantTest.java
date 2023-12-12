@@ -10,7 +10,7 @@ public class ParticipantTest {
     @Test
     void 참가자_최대_글자_초과() {
         assertThatExceptionOfType(IllegalArgumentException.class)
-                .isThrownBy(() -> new Participant("abcdefg"))
+                .isThrownBy(() -> new Participant("abcdefg", 0))
                 .withMessage("참가자 이름은 5글자를 넘을 수 없습니다.");
     }
 }
